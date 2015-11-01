@@ -11,7 +11,11 @@ public class Catalog{
     fill(con);
   }
   
+<<<<<<< HEAD
   public static void main(String[] args){
+=======
+  public static void main(String[] args) throws Exception{
+>>>>>>> origin/master
     Boolean notDone = true;
     ResultSet result = null;
     Statement s = null;
@@ -23,7 +27,10 @@ public class Catalog{
       s=con.createStatement();
       notDone = false;
       Catalog c = new Catalog(con);
+<<<<<<< HEAD
      // System.out.println("working");
+=======
+>>>>>>> origin/master
       s.close();
       con.close();
     } catch(Exception e){
@@ -32,6 +39,7 @@ public class Catalog{
       Catalog c = new Catalog(con);
       //  s.close();
       //con.close();
+<<<<<<< HEAD
     }    
   }
   
@@ -123,4 +131,98 @@ public class Catalog{
     
   }
   
+=======
+    }
+    
+ }
+ 
+public void fill(Connection con){
+  //throws SQLException, IOException, java.lang.ClassNotFoundException {
+
+  try{
+    ResultSet result = null;
+    Statement s = null;
+    s=con.createStatement();
+    ArrayList<Integer> ProdID = new ArrayList<Integer>();
+    ArrayList<Integer> prs = new ArrayList<Integer>();
+    ArrayList<Integer> rr = new ArrayList<Integer>();
+    ArrayList<String>  desc = new ArrayList<String>();
+    
+    String q = "select PRODUCTID from PRODUCTS";
+    result = s.executeQuery(q);
+    ResultSetMetaData rsmd = result.getMetaData();
+    //System.out.println("TEST");
+    if (!result.next()) System.out.println ("Empty result.");
+    else{
+      for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+      }
+      do {
+        for (int i = 1; i <= rsmd.getColumnCount(); i++)
+        {
+          //System.out.println(result.getInt(i));
+          ProdID.add(result.getInt(i));
+        }
+        }while (result.next());
+    }
+//System.out.println("TEST");
+    q = "select PRICE from PRODUCTS";
+    result = s.executeQuery(q);
+    rsmd = result.getMetaData();
+    if (!result.next()) System.out.println ("Empty result.");
+    else{
+      for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+        }
+      do {
+        for (int i = 1; i <= rsmd.getColumnCount(); i++)
+        {
+          prs.add(result.getInt(i));
+          //System.out.println(result.getInt(i));
+        }
+      }while (result.next());
+    }
+    
+    q = "select RENTALRATE from PRODUCTS";
+    result = s.executeQuery(q);
+    rsmd = result.getMetaData();
+    if (!result.next()) System.out.println ("Empty result.");
+    else{
+      for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+      }
+      do {
+        for (int i = 1; i <= rsmd.getColumnCount(); i++)
+        {
+          rr.add(result.getInt(i));
+          //System.out.println(result.getInt(i));
+        }
+      }while (result.next());
+    }
+    
+    q = "select DESCRIPTION from PRODUCTS";
+    result = s.executeQuery(q);
+    rsmd = result.getMetaData();
+    if (!result.next()) System.out.println ("Empty result.");
+    else{
+      for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+      }
+      do {
+        for (int i = 1; i <= rsmd.getColumnCount(); i++)
+        {
+          desc.add(result.getString(i));
+          //System.out.println(result.getInt(i));
+        }
+      }while (result.next());
+    }
+    
+    for(int k = 0; k < prs.size(); k++){
+      Product A = new Product(ProdID.get(k), prs.get(k), desc.get(k));
+      Dictionary.put(ProdID.get(k), A);
+      System.out.println(ProdID.get(k)+ "  " + prs.get(k)+ "  " + rr.get(k)+ "  " + desc.get(k));
+    }
+  } catch(Exception e){
+    System.out.println (e);
+  }
+  
+}
+
+>>>>>>> origin/master
 }
