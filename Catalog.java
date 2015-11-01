@@ -11,7 +11,7 @@ public class Catalog{
     fill(con);
   }
   
-  public static void main(String[] args) throws Exception{
+  public static void main(String[] args){
     Boolean notDone = true;
     ResultSet result = null;
     Statement s = null;
