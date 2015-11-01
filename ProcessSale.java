@@ -4,6 +4,7 @@
 
 public class ProcessSale{
   
+  
   public static void main(String args[]){
     System.out.println("Process Sale");
     Register register = new Register();

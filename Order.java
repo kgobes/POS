@@ -42,7 +42,7 @@ public class Order {
       }
     }
     if(!isFound)
-      list.add(new LineItem(product, quantity));
+      list.add(new LineItem(product, quantity, duration));
     isSubtotalUpdated = false;
   }
   
