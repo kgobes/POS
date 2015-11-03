@@ -51,7 +51,7 @@ public class Interface{
     int orderID = keyboard.nextInt(), itemID = -1, quantity = 0;
     //statement to retrieve order from order history in DB
     //Display order
-    boolean isDoneReturning = false
+    boolean isDoneReturning = false;
     do{
       System.out.print("Enter an item ID to return an item or -1 to finish returning items: ");
       itemID = keyboard.nextInt();
