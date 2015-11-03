@@ -64,7 +64,7 @@ public class Interface{
     register.makeOrder('S');
     while(!orderComplete){
       System.out.println(register.order());
-      System.out.println("Enter a UPC of an item to add or -1 to finish adding items: ");
+      System.out.println("Enter an ID of an item to add or -1 to finish adding items: ");
       productID = keyboard.nextInt();
       if(productID >= 0){
         System.out.println("Enter a quantity: ");
@@ -86,7 +86,34 @@ public class Interface{
 //--------------------------------------------------------------------------------------------------------------------
   
   public static void processRental(){
+    boolean orderComplete = false;
+    int productID = 0, quantity = 0;
+    double amountPaid = 0.0;
+    int days = 0;
+    System.out.println("Process Rental");
     register.makeOrder('R');
+    while(!orderComplete){
+      System.out.println(register.order());
+      System.out.println("Enter an ID of an item to add or -1 to finish adding items: ");
+      productID = keyboard.nextInt();
+      if(productID >= 0){
+        System.out.println("Enter a quantity: ");
+        quantity = keyboard.nextInt();
+        System.out.println("How many days would you like to rent for? ");
+        days = keyboard.nextInt();
+        register.order().addLineItem(register.getProduct(productID), quantity, days);
+      }
+      else
+        orderComplete = true;
+    }
+    System.out.println(register.order());
+    System.out.println("Displaying Total: $" + register.order().getSubtotal() * register.TAXRATE);
+    System.out.println("Enter amount to pay: ");
+    amountPaid = keyboard.nextDouble();
+    System.out.println("Your change is $" + (amountPaid - register.order().getSubtotal() * register.TAXRATE));
+    System.out.println("Please return in " + days + " days.");
+    //Store transaction in the database
+    System.out.println("Transaction complete. Returning to main menu.");
     
   }
 
@@ -96,17 +123,21 @@ public class Interface{
     register.makeOrder('E');
     System.out.print("Please enter the order number of the item(s) you are returning: ");
     int orderID = keyboard.nextInt(), itemID = -1, quantity = 0;
+    double amountRet = 0.0;
     //statement to retrieve order from order history in DB
     //Display order
     boolean isDoneReturning = false;
     do{
       System.out.print("Enter an item ID to return an item or -1 to finish returning items: ");
       itemID = keyboard.nextInt();
-      if(itemID == -1)
+      if(itemID == -1){
         isDoneReturning = true;
+        System.out.println(quantity + " items returned. You have been refunded " + amountRet);
+      }
       else{
         System.out.print("Enter an amount to return: ");
         quantity = keyboard.nextInt();
+        amountRet += quantity * register.cat.Dictionary.get(itemID).getPrice();
         //!!!!!!!!!!!!!!!!!!
       }
     }while(!isDoneReturning);

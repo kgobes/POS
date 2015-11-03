@@ -8,7 +8,7 @@ import java.io.*;
 public class Register{
   public final double TAXRATE = 1.07;
   private Order order;
-  private Catalog cat;
+  public Catalog cat;
   public Register(){
     try{
       Statement s = null;
