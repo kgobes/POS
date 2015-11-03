@@ -10,4 +10,5 @@ public class WhiteBoxTesting1{
     System.out.println("New duration: " + rp.getDuration() + " days Should display 7 days");
     System.out.println("Valid product? " + rp.validate() +" Should display false");
   }
+
 }
