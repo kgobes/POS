@@ -148,9 +148,9 @@ public class Interface{
     do{
       userChoice = getActionChoice();
       switch(userChoice){
-        case "SALE": processSale();
-        case "RENTAL": processRental();
-        case "RETURN": processReturn();
+        case "SALE": processSale(); break;
+        case "RENTAL": processRental(); break;
+        case "RETURN": processReturn(); break;
       }
     }while(!userChoice.equals("!"));
     logOut(user);
