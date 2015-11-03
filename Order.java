@@ -7,11 +7,11 @@ import java.sql.*;
 /**
  * Order class: handles the aggregation of LineItems in an order.
  */
-public class Order {
-  private ArrayList<LineItem> list = new ArrayList<LineItem>();
-  private boolean isSubtotalUpdated = true;
-  private double subtotal = 0;
-  private int orderID;
+public abstract class Order {
+  protected ArrayList<LineItem> list = new ArrayList<LineItem>();
+  protected boolean isSubtotalUpdated = true;
+  protected double subtotal = 0;
+  protected int orderID;
   
   public String toString(){
     StringBuilder s = new StringBuilder();
@@ -25,7 +25,7 @@ public class Order {
   /**
    * Constructor, assigns orderID
    */
-  public Order(int orderID){
+  protected Order(int orderID){
     this.orderID = orderID;
   }
   
@@ -74,7 +74,6 @@ public class Order {
    * stores Order info to the database established in con
    * Not used in this use case. Implemented for order history use case
    */
-  public void storeOrder(Connection con){
-  }
+  public abstract void storeOrder();
     
 }
