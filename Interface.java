@@ -7,9 +7,14 @@ public class Interface{
   public static Scanner keyboard = new Scanner(System.in);
   
   public static void validateUser(){
-    //TODO
+    //TODO add Ro's validation here
   }
   
+  public static String getActionChoice(){
+    System.out.println("Enter SALE to process sale.\nEnter RENTAL to process Rental.\nEnter RETURN to process Return.\nEnter ! to log out/log off.");
+    return keyboard.next();
+  }
+    
   public static void processSale(){
     boolean orderComplete = false;
     int productID = 0, quantity = 0;
@@ -33,13 +38,31 @@ public class Interface{
     System.out.println("Enter amount to pay: ");
     amountPaid = keyboard.nextDouble();
     System.out.println("Your change is $" + (amountPaid - register.order().getSubtotal() * register.TAXRATE));
-    register.makeOrder();
+    //Store transaction in the database
     System.out.println("Transaction complete. Returning to main menu.");
   }
   
-  public static String getActionChoice(){
-    System.out.println("Enter SALE to process sale.\nEnter RENTAL to process Rental.\nEnter RETURN to process Return.\nEnter ! to quit.");
-    return keyboard.next();
+  public static void processRental(){
+  }
+  
+  public static void processReturn(){
+    register.makeOrder();
+    System.out.print("Please enter the order number of the item(s) you are returning: ");
+    int orderID = keyboard.nextInt(), itemID = -1, quantity = 0;
+    //statement to retrieve order from order history in DB
+    //Display order
+    boolean isDoneReturning = false
+    do{
+      System.out.print("Enter an item ID to return an item or -1 to finish returning items: ");
+      itemID = keyboard.nextInt();
+      if(itemID == -1)
+        isDoneReturning = true;
+      else{
+        System.out.print("Enter an amount to return: ");
+        quantity = keyboard.nextInt();
+        
+      }
+    }while(!isDoneReturning);
   }
   
   public static void main(String []args){
@@ -50,6 +73,8 @@ public class Interface{
       userChoice = getActionChoice();
       switch(userChoice){
         case "SALE": processSale();
+        case "RENTAL": processRental();
+        case "RETURN": processReturn();
       }
     }while(!userChoice.equals("!"));
     System.out.println("Have a nice day!");
