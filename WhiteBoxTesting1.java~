@@ -1,9 +1,0 @@
-public class WhiteBoxTesting1{
-  //Testing for Rental Product
-  RentalProduct rp = new RentalProduct(123, 20, "Red Canoe", 5);
-  System.out.println("Duration: " + rp.getDuration());
-  rp.setDuration(7); //change duration 
-  System.out.println("New duration: " + rp.getDuration());
-  
-  
-}
