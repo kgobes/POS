@@ -9,6 +9,8 @@ public class swing_sample extends JFrame
     JPasswordField t_pass;     //A special JTextField but hides input text
     JButton button;
     Container c;
+    JFrame frame2;
+    JPanel panel2;
  
     //a inner class to handling ActionEvents
     handler handle;
@@ -18,7 +20,7 @@ public class swing_sample extends JFrame
  
     swing_sample()
     {
-        super("Login form");
+        super("Login");
  
         c=getContentPane();
         c.setLayout(new FlowLayout());
@@ -33,6 +35,7 @@ public class swing_sample extends JFrame
         t_name=new JTextField(10);
         t_pass=new JPasswordField(10);
         button=new JButton("Login");
+        frame2=new JFrame("Menu");
  
         //adding actionlistener to the button
         button.addActionListener(handle);
@@ -46,7 +49,7 @@ public class swing_sample extends JFrame
         //visual
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(200,130);
+        setSize(200,300);
  
     }
     public static void main(String args[])
@@ -75,6 +78,37 @@ public class swing_sample extends JFrame
                     //a pop-up box
                     JOptionPane.showMessageDialog(null, "You have logged in successfully","Success",
                                         JOptionPane.INFORMATION_MESSAGE); 
+                    frame2 = new JFrame("Menu Screen");
+                    panel2= new JPanel();
+                    //frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    frame2.setLocationByPlatform(true);
+
+                    JButton sale = new JButton("Sale");
+                    JButton rental = new JButton("Rental");
+                    JButton returnItems = new JButton("Return");
+                    frame2.add(panel2);
+                    panel2.add(sale);
+                    frame2.setSize(200,300);
+                    
+                    
+                    
+        
+                    sale.addActionListener(new ActionListener()
+                    {
+                       public void actionPerformed(ActionEvent ae)
+                          {
+                         //if clicked then sale things should happen
+                          System.out.println("HAI");
+            }
+        });
+                    frame2.setVisible(true);
+                    c.setVisible(false);
+        
+
+        // Adding the button to the South side of the frame1.
+        //frame1.add(LoginButton, BorderLayout.PAGE_END);
+        //frame1.pack();
+        //frame1.setVisible(true);
                 }
                 else
                 {
