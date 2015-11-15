@@ -112,14 +112,14 @@ public class TwoFrames
         frame2.pack();
     }
 
-    public static void main(String... args)
+   /* public static void main(String... args)
     {
         /* Here we are Secheduling a JOB for 
          * Event Dispatcher Thread, since Swing
          * is not Thread Safe. This is used to place
          * the code which is responsible for 
          * creating and diaplaying your GUI.
-         */
+         
         SwingUtilities.invokeLater(new Runnable()
         {
             public void run()
@@ -129,5 +129,5 @@ public class TwoFrames
             }
         });
     
-    }
+    } */
 }
