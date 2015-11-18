@@ -31,20 +31,21 @@ public class Register{
   public void makeOrder(char orderType){
     String sql = "{?=call GETNEXTORDERID()}";
     int value=-1;
-    try{
-      java.sql.CallableStatement statement = DBManager.getConnection().prepareCall(sql);
-      statement.registerOutParameter(1, java.sql.Types.INTEGER);
-      statement.execute();
-      value = statement.getInt(1);
-    }catch(Exception e){
-      System.out.println("Something happened.");
-      DBManager.closeConnection();
-    }
-    switch(orderType){
-      case 'S': order = SaleFactory.getInstance().makeOrder(value); break;
-      case 'R': order = RentalFactory.getInstance().makeOrder(value); break;
-      case 'E': order = ReturnFactory.getInstance().makeOrder(value); break;
-    }
+      try{
+        java.sql.CallableStatement statement = DBManager.getConnection().prepareCall(sql);
+        statement.registerOutParameter(1, java.sql.Types.INTEGER);
+        statement.execute();
+        value = statement.getInt(1);
+      }catch(Exception e){
+        System.out.println("Something happened.");
+        DBManager.closeConnection();
+      }
+      switch(orderType){
+        case 'S': order = SaleFactory.getInstance().makeOrder(value); break;
+        case 'R': order = RentalFactory.getInstance().makeOrder(value); break;
+        case 'E': order = ReturnFactory.getInstance().makeOrder(value); break;
+        default: value = -1; break;
+      }
   }
   
   public void finishOrder(){
