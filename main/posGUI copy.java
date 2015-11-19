@@ -54,6 +54,7 @@ public class posGUI extends javax.swing.JFrame {
         rentalButton = new javax.swing.JButton();
         returnButton = new javax.swing.JButton();
         menuHeaderLabel = new javax.swing.JLabel();
+        Logout = new javax.swing.JButton();
         salePanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ProcessSaleTable = new javax.swing.JTable();
@@ -79,7 +80,7 @@ public class posGUI extends javax.swing.JFrame {
         returnPanel = new javax.swing.JPanel();
         returnLabel = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        rentalTable1 = new javax.swing.JTable();
+        returnTable = new javax.swing.JTable();
         returnItemIDLabel = new javax.swing.JLabel();
         returnQuantityLabel = new javax.swing.JLabel();
         returnDurationLabel = new javax.swing.JLabel();
@@ -99,11 +100,31 @@ public class posGUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         amountPaidTextField = new javax.swing.JTextField();
         payButton = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        checkoutTable = new javax.swing.JTable();
         receiptPanel = new javax.swing.JPanel();
         receiptTitle = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         changeTextField = new javax.swing.JTextField();
         homeButton = new javax.swing.JButton();
+        transactionsLabel = new javax.swing.JLabel();
+        newEmployeePanel = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        submitButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
+        newUserTextField = new javax.swing.JTextField();
+        levelTextField = new javax.swing.JTextField();
+        nameTextField = new javax.swing.JTextField();
+        userTextField = new javax.swing.JTextField();
+        noAccessLabel = new javax.swing.JLabel();
+        passTextField = new javax.swing.JTextField();
+        newPassTextField = new javax.swing.JTextField();
 
         jPasswordField1.setText("jPasswordField1");
 
@@ -126,6 +147,11 @@ public class posGUI extends javax.swing.JFrame {
 
         newEmployeeButton.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         newEmployeeButton.setText("New Employee");
+        newEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newEmployeeButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Nanum Gothic", 0, 18)); // NOI18N
         jLabel1.setText("Welcome to posSquared");
@@ -174,7 +200,7 @@ public class posGUI extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(passwordLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(newEmployeeButton)
@@ -210,38 +236,48 @@ public class posGUI extends javax.swing.JFrame {
         menuHeaderLabel.setFont(new java.awt.Font("Nanum Gothic", 0, 18)); // NOI18N
         menuHeaderLabel.setText("Menu:");
 
+        Logout.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
+        Logout.setText("Logout");
+        Logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuPanelLayout.createSequentialGroup()
-                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(menuPanelLayout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(saleButton)
-                            .addComponent(rentalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(returnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(menuPanelLayout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(menuHeaderLabel)))
+                .addGap(86, 86, 86)
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(saleButton)
+                    .addComponent(rentalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(returnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Logout))
                 .addContainerGap(96, Short.MAX_VALUE))
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(menuHeaderLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        menuPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {rentalButton, returnButton, saleButton});
+        menuPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Logout, rentalButton, returnButton, saleButton});
 
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(menuHeaderLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addComponent(saleButton)
                 .addGap(38, 38, 38)
                 .addComponent(rentalButton)
                 .addGap(39, 39, 39)
                 .addComponent(returnButton)
-                .addGap(86, 86, 86))
+                .addGap(42, 42, 42)
+                .addComponent(Logout)
+                .addGap(15, 15, 15))
         );
 
         getContentPane().add(menuPanel, "card3");
@@ -252,11 +288,11 @@ public class posGUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Quantity"
+                "ID", "Quantity", "Price"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -352,16 +388,33 @@ public class posGUI extends javax.swing.JFrame {
         rentalTable.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         rentalTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Quantity", "Duration"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(rentalTable);
+        if (rentalTable.getColumnModel().getColumnCount() > 0) {
+            rentalTable.getColumnModel().getColumn(0).setResizable(false);
+            rentalTable.getColumnModel().getColumn(1).setResizable(false);
+            rentalTable.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         rentalItemIDLabel.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         rentalItemIDLabel.setText("Item ID:");
@@ -453,16 +506,16 @@ public class posGUI extends javax.swing.JFrame {
                     .addGroup(rentalPanelLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(rentalCheckOutButton)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         getContentPane().add(rentalPanel, "card5");
 
         returnLabel.setFont(new java.awt.Font("Nanum Gothic", 0, 18)); // NOI18N
-        returnLabel.setText("Rental");
+        returnLabel.setText("Return");
 
-        rentalTable1.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
-        rentalTable1.setModel(new javax.swing.table.DefaultTableModel(
+        returnTable.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
+        returnTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -473,7 +526,7 @@ public class posGUI extends javax.swing.JFrame {
                 "Title 1", "Title 2"
             }
         ));
-        jScrollPane3.setViewportView(rentalTable1);
+        jScrollPane3.setViewportView(returnTable);
 
         returnItemIDLabel.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         returnItemIDLabel.setText("Item ID:");
@@ -565,7 +618,7 @@ public class posGUI extends javax.swing.JFrame {
                     .addGroup(returnPanelLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(returnCheckOutButton)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         getContentPane().add(returnPanel, "card5");
@@ -578,12 +631,6 @@ public class posGUI extends javax.swing.JFrame {
 
         totalLabel.setText("Total:");
 
-        subtotalTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                subtotalTextFieldActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Please enter an amount to pay:");
 
         payButton.setText("Pay");
@@ -593,17 +640,37 @@ public class posGUI extends javax.swing.JFrame {
             }
         });
 
+        checkoutTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "Quantity", "Price"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Float.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(checkoutTable);
+
         javax.swing.GroupLayout checkOutPanelLayout = new javax.swing.GroupLayout(checkOutPanel);
         checkOutPanel.setLayout(checkOutPanelLayout);
         checkOutPanelLayout.setHorizontalGroup(
             checkOutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(checkOutPanelLayout.createSequentialGroup()
+                .addContainerGap(44, Short.MAX_VALUE)
                 .addGroup(checkOutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkOutLabel)
                     .addGroup(checkOutPanelLayout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(checkOutLabel))
-                    .addGroup(checkOutPanelLayout.createSequentialGroup()
-                        .addGap(32, 32, 32)
                         .addGroup(checkOutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(subtotalLabel)
                             .addComponent(taxLabel)
@@ -616,14 +683,16 @@ public class posGUI extends javax.swing.JFrame {
                             .addComponent(totalTextField)
                             .addComponent(amountPaidTextField)
                             .addComponent(payButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         checkOutPanelLayout.setVerticalGroup(
             checkOutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(checkOutPanelLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(106, 106, 106)
                 .addComponent(checkOutLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(checkOutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(subtotalLabel)
                     .addComponent(subtotalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -664,6 +733,7 @@ public class posGUI extends javax.swing.JFrame {
             .addGroup(receiptPanelLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(transactionsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(receiptTitle)
                     .addGroup(receiptPanelLayout.createSequentialGroup()
                         .addComponent(jLabel4)
@@ -671,14 +741,16 @@ public class posGUI extends javax.swing.JFrame {
                         .addGroup(receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(homeButton)
                             .addComponent(changeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         receiptPanelLayout.setVerticalGroup(
             receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(receiptPanelLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(receiptTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(transactionsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(changeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -688,6 +760,130 @@ public class posGUI extends javax.swing.JFrame {
         );
 
         getContentPane().add(receiptPanel, "card8");
+
+        jLabel3.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
+        jLabel3.setText("Create a New Employee");
+
+        jLabel5.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
+        jLabel5.setText("Your Username:");
+
+        jLabel6.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
+        jLabel6.setText("Your Password:");
+
+        jLabel7.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
+        jLabel7.setText("New Username:");
+
+        jLabel8.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
+        jLabel8.setText("New Password:");
+
+        jLabel9.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
+        jLabel9.setText("Security Level for New Employee:");
+
+        jLabel10.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
+        jLabel10.setText("Employee Name:");
+
+        submitButton.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
+        submitButton.setText("Submit");
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitButtonActionPerformed(evt);
+            }
+        });
+
+        cancelButton.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout newEmployeePanelLayout = new javax.swing.GroupLayout(newEmployeePanel);
+        newEmployeePanel.setLayout(newEmployeePanelLayout);
+        newEmployeePanelLayout.setHorizontalGroup(
+            newEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(newEmployeePanelLayout.createSequentialGroup()
+                .addGroup(newEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(newEmployeePanelLayout.createSequentialGroup()
+                        .addGap(117, 117, 117)
+                        .addComponent(jLabel3))
+                    .addGroup(newEmployeePanelLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(newEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(newEmployeePanelLayout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nameTextField))
+                            .addComponent(jLabel9)
+                            .addGroup(newEmployeePanelLayout.createSequentialGroup()
+                                .addGroup(newEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel8))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(newEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(newUserTextField)
+                                    .addComponent(userTextField)
+                                    .addComponent(passTextField)
+                                    .addComponent(newPassTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(newEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(newEmployeePanelLayout.createSequentialGroup()
+                                .addComponent(levelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(newEmployeePanelLayout.createSequentialGroup()
+                                .addGap(96, 96, 96)
+                                .addComponent(noAccessLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))))
+                    .addGroup(newEmployeePanelLayout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(submitButton)
+                        .addGap(66, 66, 66)
+                        .addComponent(cancelButton)))
+                .addContainerGap())
+        );
+        newEmployeePanelLayout.setVerticalGroup(
+            newEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(newEmployeePanelLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel3)
+                .addGap(21, 21, 21)
+                .addGroup(newEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(newEmployeePanelLayout.createSequentialGroup()
+                        .addGroup(newEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(userTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(newEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(passTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(17, 17, 17)
+                        .addGroup(newEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(newUserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(newEmployeePanelLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(noAccessLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(newEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(newPassTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addGroup(newEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(levelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(newEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addGroup(newEmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(submitButton)
+                    .addComponent(cancelButton))
+                .addGap(19, 19, 19))
+        );
+
+        getContentPane().add(newEmployeePanel, "card9");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -705,7 +901,6 @@ public class posGUI extends javax.swing.JFrame {
         String sql = "{?=call RECORDSYSTEMLOGONATTEMPT(?,?)}";
         int value=-1;
       try{
-          //FIX THIS LINE ---v
       java.sql.CallableStatement statement = DBManager.getConnection().prepareCall(sql);
       statement.registerOutParameter(1, java.sql.Types.INTEGER);      
       statement.setString(2, username);
@@ -743,7 +938,7 @@ public class posGUI extends javax.swing.JFrame {
         int id = Integer.parseInt(itemIDTextField.getText());
         int quan = Integer.parseInt(quantityTextField.getText());
         register.order().addLineItem(register.getProduct(id), quan,0);
-        Integer[] row = {id, quan};
+        Integer[] row = {id, quan, (int)register.getProduct(id).getPrice() * quan};//price?
         DefaultTableModel model = (DefaultTableModel)ProcessSaleTable.getModel();
         model.addRow(row);
     
@@ -756,15 +951,37 @@ public class posGUI extends javax.swing.JFrame {
 
     private void rentalCheckOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentalCheckOutButtonActionPerformed
         // TODO add your handling code here:
-        //WRITE CODE FOR WHAT HAPPENS IF CHECK OUT IS HIT IN RENTAL
+        rentalPanel.setVisible(false);
+        checkOutPanel.setVisible(true);
+        checkOutPanel.add(checkOutLabel);
+        checkOutPanel.add(rentalTable);
+        rentalTable.setVisible(true);
+        double subtotal = register.order().getSubtotal();
+        subtotalTextField.setText(Double.toString(subtotal));
+        double total = subtotal * register.TAXRATE;
+        double tax = total - subtotal;
+        totalTextField.setText(Double.toString(total));
+        taxTextField.setText(Double.toString(tax));
+        
     }//GEN-LAST:event_rentalCheckOutButtonActionPerformed
 
     private void returnCheckOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnCheckOutButtonActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_returnCheckOutButtonActionPerformed
 
     private void rentalAddToCartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentalAddToCartButtonActionPerformed
         // TODO add your handling code here:
+        register.makeOrder('R');
+        System.out.println(register.order());
+        int id = Integer.parseInt(rentalItemIDTextField.getText());
+        int quan = Integer.parseInt(rentalQuantityTextField.getText());
+        int duration = Integer.parseInt(rentalDurationTextField.getText());
+        register.order().addLineItem(register.getProduct(id), quan, 0);
+        Integer[] row = {id, quan, duration};
+        DefaultTableModel model = (DefaultTableModel)rentalTable.getModel();
+        model.addRow(row);
+        
     }//GEN-LAST:event_rentalAddToCartButtonActionPerformed
 
     private void returnAddToCartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnAddToCartButtonActionPerformed
@@ -788,29 +1005,30 @@ public class posGUI extends javax.swing.JFrame {
         salePanel.setVisible(false);
         checkOutPanel.setVisible(true);
         checkOutPanel.add(checkOutLabel);
-        checkOutPanel.add(ProcessSaleTable);
-        ProcessSaleTable.setVisible(true);
+       // checkOutPanel.add(ProcessSaleTable);
+        //ProcessSaleTable.setVisible(true);
         double subtotal = register.order().getSubtotal();
         subtotalTextField.setText(Double.toString(subtotal));
         double total = subtotal * register.TAXRATE;
         double tax = total - subtotal;
         totalTextField.setText(Double.toString(total));
         taxTextField.setText(Double.toString(tax));
+        //ProcessSaleTable.setVisible(false);
+        
+        //salePanel.add(ProcessSaleTable);
       
     
     
     }//GEN-LAST:event_checkOutButtonActionPerformed
-
-    private void subtotalTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subtotalTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_subtotalTextFieldActionPerformed
 
     private void payButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payButtonActionPerformed
         // TODO add your handling code here:
         checkOutPanel.setVisible(false);
         receiptPanel.setVisible(true);
         receiptPanel.add(receiptTitle);
-        receiptPanel.add(ProcessSaleTable);
+        //checkoutTable= ProcessSaleTable;
+        //receiptPanel.add(ProcessSaleTable);
+        transactionsLabel.setText(register.order().toString());
     //Store transaction in the database
         double amountPaid = Integer.parseInt(amountPaidTextField.getText());
         double change = amountPaid - register.order().getSubtotal()*register.TAXRATE;
@@ -820,9 +1038,103 @@ public class posGUI extends javax.swing.JFrame {
 
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel)ProcessSaleTable.getModel();
+        while(ProcessSaleTable.getRowCount() > 0)
+        {
+            model.removeRow(0);
+        }
+        DefaultTableModel model2 = (DefaultTableModel)rentalTable.getModel();
+        while(rentalTable.getRowCount() > 0)
+        {
+            model2.removeRow(0);
+        }
+        DefaultTableModel model3 = (DefaultTableModel)returnTable.getModel();
+        while(returnTable.getRowCount() > 0)
+        {
+            model3.removeRow(0);
+        }
+        
+        itemIDTextField.setText("");
+        quantityTextField.setText("");
+        rentalItemIDTextField.setText("");
+        rentalQuantityTextField.setText("");
+        returnItemIDTextField.setText("");
+        returnQuantityTextField.setText("");
+        rentalDurationTextField.setText("");
+        subtotalTextField.setText("");
+        taxTextField.setText("");
+        totalTextField.setText("");
+        
         receiptPanel.setVisible(false);
         menuPanel.setVisible(true);
     }//GEN-LAST:event_homeButtonActionPerformed
+
+    private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
+        // TODO add your handling code here:
+        
+        //logout(usernameTextField.getText());
+    String sql = "{?=call RECORDSYSTEMLOGOUT(?)}";
+    int value=-1;
+    try{
+      java.sql.CallableStatement statement = DBManager.getConnection().prepareCall(sql);
+      statement.registerOutParameter(1, java.sql.Types.INTEGER);
+      statement.setString(2, usernameTextField.getText());
+      //System.out.println("here.");
+      statement.execute();
+      value = statement.getInt(1);
+    }catch(Exception e){
+      System.out.println("Something happened." + e);
+      DBManager.closeConnection();
+    }
+    
+    if(value == 0){
+        menuPanel.setVisible(false);
+        loginPanel.setVisible(true);
+    }
+        
+        usernameTextField.setText("");
+        passwordTextField.setText("");
+    }//GEN-LAST:event_LogoutActionPerformed
+
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+        // TODO add your handling code here:
+        //String password= new String (passTextField.getPassword());
+        //String newpassword= new String (newPassTextField.getPassword());
+        if(!SystemAdmin.addNewUser(userTextField.getText(), passTextField.getText(), newUserTextField.getText(), newPassTextField.getText(), Integer.parseInt(levelTextField.getText()), nameTextField.getText()))
+            noAccessLabel.setText("Access Denied");
+        else{
+            newEmployeePanel.setVisible(false);
+            newPassTextField.setText("");
+            newUserTextField.setText("");
+            levelTextField.setText("");
+            userTextField.setText("");
+            passTextField.setText("");
+            nameTextField.setText("");
+            noAccessLabel.setText("");
+            loginPanel.setVisible(true);
+        }
+    }//GEN-LAST:event_submitButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // TODO add your handling code here:
+        newEmployeePanel.setVisible(false);
+        noAccessLabel.setText("");
+        newPassTextField.setText("");
+        newUserTextField.setText("");
+        levelTextField.setText("");
+        userTextField.setText("");
+        passTextField.setText("");
+        nameTextField.setText("");
+        loginPanel.setVisible(true);
+        
+        
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void newEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newEmployeeButtonActionPerformed
+        // TODO add your handling code here:
+        loginPanel.setVisible(false);
+        newEmployeePanel.setVisible(true);
+    }//GEN-LAST:event_newEmployeeButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -861,29 +1173,47 @@ public class posGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Logout;
     private javax.swing.JTable ProcessSaleTable;
     private javax.swing.JLabel RentalLabel;
     private javax.swing.JButton addToCartButton;
     private javax.swing.JTextField amountPaidTextField;
+    private javax.swing.JButton cancelButton;
     private javax.swing.JTextField changeTextField;
     private javax.swing.JButton checkOutButton;
     private javax.swing.JLabel checkOutLabel;
     private javax.swing.JPanel checkOutPanel;
+    private javax.swing.JTable checkoutTable;
     private javax.swing.JButton homeButton;
     private javax.swing.JLabel itemIDLabel;
     private javax.swing.JTextField itemIDTextField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextField levelTextField;
     private javax.swing.JButton loginButton;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JLabel menuHeaderLabel;
     private javax.swing.JPanel menuPanel;
+    private javax.swing.JTextField nameTextField;
     private javax.swing.JButton newEmployeeButton;
+    private javax.swing.JPanel newEmployeePanel;
+    private javax.swing.JTextField newPassTextField;
+    private javax.swing.JTextField newUserTextField;
+    private javax.swing.JLabel noAccessLabel;
+    private javax.swing.JTextField passTextField;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JPasswordField passwordTextField;
     private javax.swing.JButton payButton;
@@ -903,7 +1233,6 @@ public class posGUI extends javax.swing.JFrame {
     private javax.swing.JLabel rentalQuantityLabel;
     private javax.swing.JTextField rentalQuantityTextField;
     private javax.swing.JTable rentalTable;
-    private javax.swing.JTable rentalTable1;
     private javax.swing.JButton returnAddToCartButton;
     private javax.swing.JButton returnButton;
     private javax.swing.JButton returnCheckOutButton;
@@ -915,14 +1244,18 @@ public class posGUI extends javax.swing.JFrame {
     private javax.swing.JPanel returnPanel;
     private javax.swing.JLabel returnQuantityLabel;
     private javax.swing.JTextField returnQuantityTextField;
+    private javax.swing.JTable returnTable;
     private javax.swing.JButton saleButton;
     private javax.swing.JPanel salePanel;
+    private javax.swing.JButton submitButton;
     private javax.swing.JLabel subtotalLabel;
     private javax.swing.JTextField subtotalTextField;
     private javax.swing.JLabel taxLabel;
     private javax.swing.JTextField taxTextField;
     private javax.swing.JLabel totalLabel;
     private javax.swing.JTextField totalTextField;
+    private javax.swing.JLabel transactionsLabel;
+    private javax.swing.JTextField userTextField;
     private javax.swing.JLabel usernameLabel;
     private javax.swing.JTextField usernameTextField;
     // End of variables declaration//GEN-END:variables
