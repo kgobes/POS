@@ -2,6 +2,13 @@ package main;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.sql.*;
+import java.io.*;
+import java.sql.Driver;
+import java.sql.Connection;
+import javax.swing.table.*;
+import static main.Interface.keyboard;
+import static main.Interface.register;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,12 +20,14 @@ import javax.swing.*;
  * @author ashleykim
  */
 public class posGUI extends javax.swing.JFrame {
+
     public static Register register = new Register();
     /**
      * Creates new form posGUI
      */
     public posGUI() {
         initComponents();
+    
         //DBManager db= new DBManager();
     }
 
@@ -54,6 +63,7 @@ public class posGUI extends javax.swing.JFrame {
         itemIDTextField = new javax.swing.JTextField();
         quantityTextField = new javax.swing.JTextField();
         addToCartButton = new javax.swing.JButton();
+        checkOutButton = new javax.swing.JButton();
         rentalPanel = new javax.swing.JPanel();
         RentalLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -78,14 +88,32 @@ public class posGUI extends javax.swing.JFrame {
         returnDurationTextField = new javax.swing.JTextField();
         returnAddToCartButton = new javax.swing.JButton();
         returnCheckOutButton = new javax.swing.JButton();
+        checkOutPanel = new javax.swing.JPanel();
+        checkOutLabel = new javax.swing.JLabel();
+        subtotalLabel = new javax.swing.JLabel();
+        taxLabel = new javax.swing.JLabel();
+        totalLabel = new javax.swing.JLabel();
+        subtotalTextField = new javax.swing.JTextField();
+        taxTextField = new javax.swing.JTextField();
+        totalTextField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        amountPaidTextField = new javax.swing.JTextField();
+        payButton = new javax.swing.JButton();
+        receiptPanel = new javax.swing.JPanel();
+        receiptTitle = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        changeTextField = new javax.swing.JTextField();
+        homeButton = new javax.swing.JButton();
 
         jPasswordField1.setText("jPasswordField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
 
+        usernameLabel.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         usernameLabel.setText("Username:");
 
+        loginButton.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         loginButton.setText("Login");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,11 +121,13 @@ public class posGUI extends javax.swing.JFrame {
             }
         });
 
+        passwordLabel.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         passwordLabel.setText("Password:");
 
+        newEmployeeButton.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         newEmployeeButton.setText("New Employee");
 
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Nanum Gothic", 0, 18)); // NOI18N
         jLabel1.setText("Welcome to posSquared");
 
         javax.swing.GroupLayout loginPanelLayout = new javax.swing.GroupLayout(loginPanel);
@@ -111,7 +141,7 @@ public class posGUI extends javax.swing.JFrame {
                     .addComponent(newEmployeeButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPanelLayout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -144,7 +174,7 @@ public class posGUI extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(passwordLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(newEmployeeButton)
@@ -153,6 +183,7 @@ public class posGUI extends javax.swing.JFrame {
 
         getContentPane().add(loginPanel, "card2");
 
+        saleButton.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         saleButton.setText("Sale");
         saleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,10 +191,23 @@ public class posGUI extends javax.swing.JFrame {
             }
         });
 
+        rentalButton.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         rentalButton.setText("Rental");
+        rentalButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rentalButtonActionPerformed(evt);
+            }
+        });
 
+        returnButton.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         returnButton.setText("Return");
+        returnButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnButtonActionPerformed(evt);
+            }
+        });
 
+        menuHeaderLabel.setFont(new java.awt.Font("Nanum Gothic", 0, 18)); // NOI18N
         menuHeaderLabel.setText("Menu:");
 
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
@@ -181,7 +225,7 @@ public class posGUI extends javax.swing.JFrame {
                     .addGroup(menuPanelLayout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(menuHeaderLabel)))
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
         menuPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {rentalButton, returnButton, saleButton});
@@ -191,7 +235,7 @@ public class posGUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(menuHeaderLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(saleButton)
                 .addGap(38, 38, 38)
                 .addComponent(rentalButton)
@@ -202,29 +246,47 @@ public class posGUI extends javax.swing.JFrame {
 
         getContentPane().add(menuPanel, "card3");
 
+        ProcessSaleTable.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         ProcessSaleTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Quantity"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(ProcessSaleTable);
 
+        processSaleLabel.setFont(new java.awt.Font("Nanum Gothic", 0, 18)); // NOI18N
         processSaleLabel.setText("Process Sale");
 
+        itemIDLabel.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         itemIDLabel.setText("Item ID:");
 
+        quantityLabel.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         quantityLabel.setText("Quantity:");
 
+        addToCartButton.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         addToCartButton.setText("Add to Cart");
         addToCartButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addToCartButtonActionPerformed(evt);
+            }
+        });
+
+        checkOutButton.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
+        checkOutButton.setText("Check Out");
+        checkOutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkOutButtonActionPerformed(evt);
             }
         });
 
@@ -239,7 +301,7 @@ public class posGUI extends javax.swing.JFrame {
                         .addGroup(salePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(processSaleLabel))
-                        .addContainerGap(57, Short.MAX_VALUE))
+                        .addContainerGap(64, Short.MAX_VALUE))
                     .addGroup(salePanelLayout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(salePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,10 +313,15 @@ public class posGUI extends javax.swing.JFrame {
                             .addComponent(quantityTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(57, 57, 57))))
             .addGroup(salePanelLayout.createSequentialGroup()
-                .addGap(117, 117, 117)
-                .addComponent(addToCartButton)
+                .addGap(116, 116, 116)
+                .addGroup(salePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkOutButton)
+                    .addComponent(addToCartButton))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
+
+        salePanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {addToCartButton, checkOutButton});
+
         salePanelLayout.setVerticalGroup(
             salePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(salePanelLayout.createSequentialGroup()
@@ -270,15 +337,19 @@ public class posGUI extends javax.swing.JFrame {
                 .addGroup(salePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(quantityLabel)
                     .addComponent(quantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addToCartButton)
-                .addGap(23, 23, 23))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(checkOutButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(salePanel, "card4");
 
+        RentalLabel.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         RentalLabel.setText("Return");
 
+        rentalTable.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         rentalTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -292,12 +363,16 @@ public class posGUI extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(rentalTable);
 
+        rentalItemIDLabel.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         rentalItemIDLabel.setText("Item ID:");
 
+        rentalQuantityLabel.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         rentalQuantityLabel.setText("Quantity:");
 
+        rentalDurationLabel.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         rentalDurationLabel.setText("Duration:");
 
+        rentalAddToCartButton.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         rentalAddToCartButton.setText("Add to Cart");
         rentalAddToCartButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -305,6 +380,7 @@ public class posGUI extends javax.swing.JFrame {
             }
         });
 
+        rentalCheckOutButton.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         rentalCheckOutButton.setText("Checkout");
         rentalCheckOutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -382,33 +458,33 @@ public class posGUI extends javax.swing.JFrame {
 
         getContentPane().add(rentalPanel, "card5");
 
-        returnLabel.setText("Rental:");
+        returnLabel.setFont(new java.awt.Font("Nanum Gothic", 0, 18)); // NOI18N
+        returnLabel.setText("Rental");
 
+        rentalTable1.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         rentalTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2"
             }
         ));
         jScrollPane3.setViewportView(rentalTable1);
 
+        returnItemIDLabel.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         returnItemIDLabel.setText("Item ID:");
 
+        returnQuantityLabel.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         returnQuantityLabel.setText("Quantity:");
 
+        returnDurationLabel.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         returnDurationLabel.setText("Duration:");
 
-        returnItemIDTextField.setText("jTextField1");
-
-        returnQuantityTextField.setText("jTextField2");
-
-        returnDurationTextField.setText("jTextField3");
-
+        returnAddToCartButton.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         returnAddToCartButton.setText("Add to Cart");
         returnAddToCartButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -416,6 +492,7 @@ public class posGUI extends javax.swing.JFrame {
             }
         });
 
+        returnCheckOutButton.setFont(new java.awt.Font("Nanum Gothic", 0, 14)); // NOI18N
         returnCheckOutButton.setText("Checkout");
         returnCheckOutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -441,9 +518,9 @@ public class posGUI extends javax.swing.JFrame {
                                 .addComponent(returnItemIDLabel)
                                 .addGap(55, 55, 55))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, returnPanelLayout.createSequentialGroup()
-                                .addGroup(returnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(returnQuantityLabel)
-                                    .addComponent(returnDurationLabel))
+                                .addGroup(returnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(returnDurationLabel)
+                                    .addComponent(returnQuantityLabel))
                                 .addGap(47, 47, 47)))
                         .addGroup(returnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(returnPanelLayout.createSequentialGroup()
@@ -479,19 +556,138 @@ public class posGUI extends javax.swing.JFrame {
                     .addGroup(returnPanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(returnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(returnQuantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(returnQuantityLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(returnQuantityLabel)
+                            .addComponent(returnQuantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
                         .addGroup(returnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(returnDurationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(returnDurationLabel)))
                     .addGroup(returnPanelLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(returnCheckOutButton)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         getContentPane().add(returnPanel, "card5");
+
+        checkOutLabel.setText("Checkout");
+
+        subtotalLabel.setText("Subtotal:");
+
+        taxLabel.setText("Tax:");
+
+        totalLabel.setText("Total:");
+
+        subtotalTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subtotalTextFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Please enter an amount to pay:");
+
+        payButton.setText("Pay");
+        payButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                payButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout checkOutPanelLayout = new javax.swing.GroupLayout(checkOutPanel);
+        checkOutPanel.setLayout(checkOutPanelLayout);
+        checkOutPanelLayout.setHorizontalGroup(
+            checkOutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(checkOutPanelLayout.createSequentialGroup()
+                .addGroup(checkOutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(checkOutPanelLayout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addComponent(checkOutLabel))
+                    .addGroup(checkOutPanelLayout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(checkOutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(subtotalLabel)
+                            .addComponent(taxLabel)
+                            .addComponent(totalLabel)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(checkOutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(subtotalTextField)
+                            .addComponent(taxTextField)
+                            .addComponent(totalTextField)
+                            .addComponent(amountPaidTextField)
+                            .addComponent(payButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))))
+                .addContainerGap(49, Short.MAX_VALUE))
+        );
+        checkOutPanelLayout.setVerticalGroup(
+            checkOutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(checkOutPanelLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(checkOutLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                .addGroup(checkOutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(subtotalLabel)
+                    .addComponent(subtotalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(checkOutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(taxLabel)
+                    .addComponent(taxTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(checkOutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(totalLabel)
+                    .addComponent(totalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addGroup(checkOutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(amountPaidTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(payButton)
+                .addGap(8, 8, 8))
+        );
+
+        getContentPane().add(checkOutPanel, "card7");
+
+        receiptTitle.setText("Receipt");
+
+        jLabel4.setText("Change:");
+
+        homeButton.setText("Return to Main Menu");
+        homeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                homeButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout receiptPanelLayout = new javax.swing.GroupLayout(receiptPanel);
+        receiptPanel.setLayout(receiptPanelLayout);
+        receiptPanelLayout.setHorizontalGroup(
+            receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(receiptPanelLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(receiptTitle)
+                    .addGroup(receiptPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(27, 27, 27)
+                        .addGroup(receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(homeButton)
+                            .addComponent(changeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(60, Short.MAX_VALUE))
+        );
+        receiptPanelLayout.setVerticalGroup(
+            receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(receiptPanelLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(receiptTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+                .addGroup(receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(changeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(homeButton)
+                .addContainerGap())
+        );
+
+        getContentPane().add(receiptPanel, "card8");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -500,7 +696,12 @@ public class posGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         String username= usernameTextField.getText();
         String password= new String (passwordTextField.getPassword()); 
-
+        /*logOn(username, password);
+            loginPanel.setVisible(false);
+            menuPanel.setVisible(true);
+        */
+        
+  
         String sql = "{?=call RECORDSYSTEMLOGONATTEMPT(?,?)}";
         int value=-1;
       try{
@@ -513,7 +714,7 @@ public class posGUI extends javax.swing.JFrame {
       //System.out.println("here.");
       value = statement.getInt(1);
     }catch(Exception e){
-      System.out.println("Something happened:"+e);
+      System.out.println("Something random happened:"+e);
       DBManager.closeConnection();
     }
     
@@ -523,8 +724,9 @@ public class posGUI extends javax.swing.JFrame {
     }
     else{ 
       //return false;
-       System.out.print("error");
+       System.out.print("incorrect username/password combination");
     }
+        
         
     }//GEN-LAST:event_loginButtonActionPerformed
 
@@ -538,10 +740,18 @@ public class posGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         register.makeOrder('S');
         System.out.println(register.order());
-        register.order().addLineItem(register.getProduct(itemIDTextField.getText()),quantityTextField.getText(),0);
-        Object[] row = {itemIDTextField.getText(), quantityTextField.getText()};
-        //ProcessSaleTable.
+        int id = Integer.parseInt(itemIDTextField.getText());
+        int quan = Integer.parseInt(quantityTextField.getText());
+        register.order().addLineItem(register.getProduct(id), quan,0);
+        Integer[] row = {id, quan};
+        DefaultTableModel model = (DefaultTableModel)ProcessSaleTable.getModel();
+        model.addRow(row);
+    
         // ADD SALES TO TABLE
+        
+        //check to see if ID is in the database**
+     
+    
     }//GEN-LAST:event_addToCartButtonActionPerformed
 
     private void rentalCheckOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentalCheckOutButtonActionPerformed
@@ -560,6 +770,59 @@ public class posGUI extends javax.swing.JFrame {
     private void returnAddToCartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnAddToCartButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_returnAddToCartButtonActionPerformed
+
+    private void rentalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentalButtonActionPerformed
+        // TODO add your handling code here:
+        menuPanel.setVisible(false);
+        rentalPanel.setVisible(true);
+    }//GEN-LAST:event_rentalButtonActionPerformed
+
+    private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
+        // TODO add your handling code here:
+        menuPanel.setVisible(false);
+        returnPanel.setVisible(true);
+    }//GEN-LAST:event_returnButtonActionPerformed
+
+    private void checkOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkOutButtonActionPerformed
+        // TODO add your handling code here:
+        salePanel.setVisible(false);
+        checkOutPanel.setVisible(true);
+        checkOutPanel.add(checkOutLabel);
+        checkOutPanel.add(ProcessSaleTable);
+        ProcessSaleTable.setVisible(true);
+        double subtotal = register.order().getSubtotal();
+        subtotalTextField.setText(Double.toString(subtotal));
+        double total = subtotal * register.TAXRATE;
+        double tax = total - subtotal;
+        totalTextField.setText(Double.toString(total));
+        taxTextField.setText(Double.toString(tax));
+      
+    
+    
+    }//GEN-LAST:event_checkOutButtonActionPerformed
+
+    private void subtotalTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subtotalTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_subtotalTextFieldActionPerformed
+
+    private void payButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payButtonActionPerformed
+        // TODO add your handling code here:
+        checkOutPanel.setVisible(false);
+        receiptPanel.setVisible(true);
+        receiptPanel.add(receiptTitle);
+        receiptPanel.add(ProcessSaleTable);
+    //Store transaction in the database
+        double amountPaid = Integer.parseInt(amountPaidTextField.getText());
+        double change = amountPaid - register.order().getSubtotal()*register.TAXRATE;
+        changeTextField.setText(Double.toString(change));
+        
+    }//GEN-LAST:event_payButtonActionPerformed
+
+    private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
+        // TODO add your handling code here:
+        receiptPanel.setVisible(false);
+        menuPanel.setVisible(true);
+    }//GEN-LAST:event_homeButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -601,9 +864,17 @@ public class posGUI extends javax.swing.JFrame {
     private javax.swing.JTable ProcessSaleTable;
     private javax.swing.JLabel RentalLabel;
     private javax.swing.JButton addToCartButton;
+    private javax.swing.JTextField amountPaidTextField;
+    private javax.swing.JTextField changeTextField;
+    private javax.swing.JButton checkOutButton;
+    private javax.swing.JLabel checkOutLabel;
+    private javax.swing.JPanel checkOutPanel;
+    private javax.swing.JButton homeButton;
     private javax.swing.JLabel itemIDLabel;
     private javax.swing.JTextField itemIDTextField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -615,9 +886,12 @@ public class posGUI extends javax.swing.JFrame {
     private javax.swing.JButton newEmployeeButton;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JPasswordField passwordTextField;
+    private javax.swing.JButton payButton;
     private javax.swing.JLabel processSaleLabel;
     private javax.swing.JLabel quantityLabel;
     private javax.swing.JTextField quantityTextField;
+    private javax.swing.JPanel receiptPanel;
+    private javax.swing.JLabel receiptTitle;
     private javax.swing.JButton rentalAddToCartButton;
     private javax.swing.JButton rentalButton;
     private javax.swing.JButton rentalCheckOutButton;
@@ -643,6 +917,12 @@ public class posGUI extends javax.swing.JFrame {
     private javax.swing.JTextField returnQuantityTextField;
     private javax.swing.JButton saleButton;
     private javax.swing.JPanel salePanel;
+    private javax.swing.JLabel subtotalLabel;
+    private javax.swing.JTextField subtotalTextField;
+    private javax.swing.JLabel taxLabel;
+    private javax.swing.JTextField taxTextField;
+    private javax.swing.JLabel totalLabel;
+    private javax.swing.JTextField totalTextField;
     private javax.swing.JLabel usernameLabel;
     private javax.swing.JTextField usernameTextField;
     // End of variables declaration//GEN-END:variables
