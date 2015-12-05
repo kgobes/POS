@@ -24,6 +24,9 @@ public class swing_sample extends JFrame
     JButton enter;
     JLabel item;
     JButton sale;
+
+    JPanel panel4, panel3;
+
  
     //a inner class to handling ActionEvents
     handler handle;
@@ -40,7 +43,7 @@ public class swing_sample extends JFrame
  
         //extra classes
         db= new DBManager();
-            handle =new handler();
+        handle =new handler();
  
                 //swing components
         l_name=new JLabel("Username");
@@ -86,7 +89,7 @@ public class swing_sample extends JFrame
                 System.out.println("Username,Pwd:"+t_name.getText()+","+pwd);
  
                 //The entered username and password are sent via "checkLogin()" which return boolean
-                if(db.checkLogin(t_name.getText(), pwd))
+                if(db.checkLogin(t_name.getText(), pwd)) 
                 {
                     //a pop-up box
                     JOptionPane.showMessageDialog(null, "You have logged in successfully","Success",
@@ -104,16 +107,43 @@ public class swing_sample extends JFrame
                     panel2.add(rental);
                     panel2.add(returnItems);
                     frame2.setSize(200,300);
-                    
-                    
-                    
-            
-        
+
                     sale.addActionListener(new ActionListener()
                     {
                        public void actionPerformed(ActionEvent ae)
                           {
+                         panel2.setVisible(false);
+                         panel3= new JPanel();
+                         frame2.add(panel3);
+                         
+                         /*boolean orderComplete = false;
+                         int productID = 0, quantity = 0;
+                         double amountPaid = 0.0;
+                         System.out.println("Process Sale");
+                         register.makeOrder('S');
+                         while(!orderComplete){
+                              System.out.println(register.order());
+                              System.out.println("Enter an ID of an item to add or -1 to finish adding items: ");
+                              productID = keyboard.nextInt();
+                              if(productID >= 0){
+                                   System.out.println("Enter a quantity: ");
+                                   quantity = keyboard.nextInt();
+                                   register.order().addLineItem(register.getProduct(productID), quantity, 0);
+                              }
+                              else
+                                   orderComplete = true;
+                         }
+                         System.out.println(register.order());
+                         System.out.println("Displaying Total: $" + register.order().getSubtotal() * register.TAXRATE);
+                         System.out.println("Enter amount to pay: ");
+                         amountPaid = keyboard.nextDouble();
+                         System.out.println("Your change is $" + (amountPaid - register.order().getSubtotal() * register.TAXRATE));
+                         //Store transaction in the database
+                         System.out.println("Transaction complete. Returning to main menu.");
+                         */
+                         
                          //if clicked then sale things should happen
+
                           processSaleFrame= new JFrame("Process Sale");
                           processSale= new JPanel();
                           title = new JLabel("Process Sale");
@@ -147,35 +177,6 @@ public class swing_sample extends JFrame
                           {
                          item = new JLabel(id.getText() + "    " + quan.getText());
                          processSale.add(item);
-                         
-                          /*boolean orderComplete = false;
-                          int productID = 0, quantity = 0;
-                          double amountPaid = 0.0;
-                          
-                          register.makeOrder('S');
-                          while(!orderComplete){
-                            item = new JLabel(id.getText() + "    " + quan.getText());
-                            
-                            System.out.println(register.order());
-                            System.out.println("Enter an ID of an item to add or -1 to finish adding items: ");
-                            productID = keyboard.nextInt();
-                            if(productID >= 0){
-                              System.out.println("Enter a quantity: ");
-                              quantity = keyboard.nextInt();
-                              register.order().addLineItem(register.getProduct(productID), quantity, 0);
-                            }
-                            else
-                              orderComplete = true;
-                          }
-                          System.out.println(register.order());
-                          System.out.println("Displaying Total: $" + register.order().getSubtotal() * register.TAXRATE);
-                          System.out.println("Enter amount to pay: ");
-                          amountPaid = keyboard.nextDouble();
-                          System.out.println("Your change is $" + (amountPaid - register.order().getSubtotal() * register.TAXRATE));
-                          //Store transaction in the database
-                          System.out.println("Transaction complete. Returning to main menu.");
-                         
-                         */
                        }
             }); 
                     
@@ -185,8 +186,18 @@ public class swing_sample extends JFrame
                     
                 }         
                     
-                    
-           else
+        //});
+                    frame2.setVisible(true);
+                    c.setVisible(false);
+        
+
+        // Adding the button to the South side of the frame1.
+        //frame1.add(LoginButton, BorderLayout.PAGE_END);
+        //frame1.pack();
+        //frame1.setVisible(true);
+                }
+                else
+
                 {
                     //a pop-up box
                     JOptionPane.showMessageDialog(null, "Login failed!","Failed!!",
@@ -202,4 +213,3 @@ public class swing_sample extends JFrame
         }
  
     }
-}

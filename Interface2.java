@@ -1,25 +1,106 @@
-
-//Dan Soskey
-
 import java.util.Scanner;
 import java.sql.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
-public class Interface{
+public class Interface2{
   public static Register register = new Register();
   public static Scanner keyboard = new Scanner(System.in);
   
 //--------------------------------------------------------------------------------------------------------------------
   
-  public static String validateUser(){
+  /*public String validateUser(){
     String user, pass;
-    System.out.print("Enter a username: ");
     user = keyboard.next();
     System.out.print("Enter your password: ");
     pass = keyboard.next();
-    logOn(user, pass);//TODO
+    logOn(user, pass);//TODO add if statement
     System.out.println("Combination acceptable. Welcome aboard.");
+
     return user;
-  }
+  }*/
+  
+  // Making our first JFrame.
+    JFrame frame1 = new JFrame("Login Screen");
+    // Declaring our second JFrame.
+    JFrame frame2 ;
+
+    public void createAndDisplayGUI()
+    {
+        String user, pass;
+        frame1.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);       
+
+        // Used to position the JFrame at the middle of the screen.
+        //frame1.setLocationRelativeTo(null);    
+        JPanel panel= new JPanel();
+        JLabel title= new JLabel("Employee Login");
+        JTextField username=  new JTextField ("Enter username", 15);
+        user=username.getText();
+        //username.setColumns(20);
+        JTextField password= new JTextField ("Enter password", 15);
+        pass= password.getText();
+        frame1.add(panel);
+        panel.add(title);
+        panel.add(username);
+        panel.add(password);
+        
+        // Use this instead for placing windows, as determined by the OS.
+        frame1.setLocationByPlatform(true);     
+
+        // Calling this method to create our frame2.
+        makeMenu();
+
+        // Button to show the second JFrame.
+        JButton LoginButton = new JButton("Login");
+        
+        JButton newEmployee= new JButton("New Employee Sign Up");
+        panel.add(LoginButton);
+        panel.add(newEmployee);
+        
+        
+        LoginButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae)
+            {
+                
+                if (!(frame2.isShowing()))
+                {   
+                    logOn(user, pass); //log on need check?
+                    makeMenu();
+                    frame2.setVisible(true);
+                }
+                System.out.print("pressed");
+            }
+        });
+        
+        //return user;
+    }
+    
+        private void makeMenu(){       
+        frame2 = new JFrame("Menu Screen");
+        frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame2.setLocationByPlatform(true);
+
+        JButton hideButton = new JButton("HIDE FRAME");
+        
+        hideButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ae)
+            {
+                // On the click of this button, frame2 will 
+                // disappear and HAI will be displayed on the console.
+                frame2.dispose();
+                System.out.println("HAI");
+            }
+        });
+        
+
+        // Adding the button to the South side of the frame1.
+        //frame1.add(LoginButton, BorderLayout.PAGE_END);
+        frame1.pack();
+        frame1.setVisible(true);
+    }
+
 
 //--------------------------------------------------------------------------------------------------------------------
   
@@ -35,7 +116,6 @@ public class Interface{
       statement.execute();
       //System.out.println("here.");
       value = statement.getInt(1);
-      System.out.println("value: " + value);
     }catch(Exception e){
       System.out.println("Something happened:"+e);
       DBManager.closeConnection();
@@ -175,9 +255,20 @@ public class Interface{
 //--------------------------------------------------------------------------------------------------------------------
   
   public static void main(String []args){
+  //  createAndDisplayGUI();
     String userChoice = "";
     System.out.println("Welcome to POSquared.");
-    String user = validateUser();
+    //String user= validateUser();
+    
+    SwingUtilities.invokeLater(new Runnable()
+        {
+            public void run()
+            {
+                TwoFrames tf = new TwoFrames();
+                tf.createAndDisplayGUI();
+            }
+        });
+    
     do{
       userChoice = getActionChoice();
       switch(userChoice){
@@ -186,7 +277,7 @@ public class Interface{
         case "RETURN": processReturn(); break;
       }
     }while(!userChoice.equals("!"));
-    logOut(user);
+    //logOut(user);
     System.out.println("Have a nice day!");
   }
 }

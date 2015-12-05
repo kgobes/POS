@@ -57,7 +57,7 @@ public class TwoFrames
     //MAKE MENU SCREEN
     private void makeMenu(){       
         frame2 = new JFrame("Menu Screen");
-        frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame2.setLocationByPlatform(true);
 
         JButton hideButton = new JButton("HIDE FRAME");

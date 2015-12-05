@@ -2,6 +2,7 @@ import java.sql.*;
 import java.io.*;
 import java.sql.Driver;
 import java.sql.Connection;
+
 class DBManager{
   PreparedStatement pst;
   ResultSet rs;
@@ -24,7 +25,7 @@ class DBManager{
     }
   }
   
-   public static boolean checkLogin(String username, String password){
+  public static boolean checkLogin(String username, String password){
     
     String sql = "{?=call RECORDSYSTEMLOGONATTEMPT(?,?)}";
     int value=-1;
@@ -37,7 +38,7 @@ class DBManager{
       //System.out.println("here.");
       value = statement.getInt(1);
     }catch(Exception e){
-      System.out.println("Something happened:"+e);
+      System.out.println("Something happened:" + e);
       DBManager.closeConnection();
     }
     

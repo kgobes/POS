@@ -1,22 +1,26 @@
-
-//Dan Soskey
-
 import java.util.Scanner;
 import java.sql.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
-public class Interface{
-  public static Register register = new Register();
+public class ProcessAction{
+  
+   public static Register register = new Register();
   public static Scanner keyboard = new Scanner(System.in);
+  public TwoFrames tf = new TwoFrames();
   
 //--------------------------------------------------------------------------------------------------------------------
   
-  public static String validateUser(){
+  public String validateUser(){
     String user, pass;
     System.out.print("Enter a username: ");
-    user = keyboard.next();
+    //user = keyboard.next();
+    user =  tf.username.getText();
+    System.out.println(user);
     System.out.print("Enter your password: ");
     pass = keyboard.next();
-    logOn(user, pass);//TODO
+    logOn(user, pass);//TODO add if statement
     System.out.println("Combination acceptable. Welcome aboard.");
     return user;
   }
@@ -35,7 +39,6 @@ public class Interface{
       statement.execute();
       //System.out.println("here.");
       value = statement.getInt(1);
-      System.out.println("value: " + value);
     }catch(Exception e){
       System.out.println("Something happened:"+e);
       DBManager.closeConnection();
@@ -175,6 +178,9 @@ public class Interface{
 //--------------------------------------------------------------------------------------------------------------------
   
   public static void main(String []args){
+    // SwingUtilities.invokeLater(new Runnable();
+    
+    tf.createAndDisplayGUI();
     String userChoice = "";
     System.out.println("Welcome to POSquared.");
     String user = validateUser();

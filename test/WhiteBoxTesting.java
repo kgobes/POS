@@ -1,18 +1,8 @@
 import junit.framework.TestCase;
 import java.sql.*;
-/**
- * A JUnit test case class.
- * Every method starting with the word "test" will be called when running
- * the test with JUnit.
- */
+
 public class WhiteBoxTesting extends TestCase {
-  
-  /**
-   * A test method.
-   * (Replace "X" with a name describing the test.  You may write as
-   * many "testSomething" methods in this class as you wish, and each
-   * one will be called when running JUnit over this class.)
-   */
+
   public void testProduct() {
     Product p= new Product(973, 100.00, "Blue Canoe");
     assertEquals(p.getProductId(), 973);
